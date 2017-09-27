@@ -3,6 +3,35 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 
+	<migrate to-version="23">
+	
+		<migrate-command name="Run Groovy Script"/>
+		<migrate-command name="Register and Baseline Datical DB Project"/>
+		<migrate-command name="Create Datical DB Project"/>
+		<migrate-command name="Get Datical DB Version"/>
+		<migrate-command name="Deploy with Datical DB">
+			<migrate-properties>
+				<migrate-property name="daticalDBPipeline"/>
+			</migrate-properties>
+		</migrate-command>
+		<migrate-command name="Validate and Forecast with Datical DB"/>
+		<migrate-command name="Export Database Schema (Snapshot)"/>
+		<migrate-command name="Read Datical DB History"/>
+		<migrate-command name="Sync Datical DB Change Log"/>
+		<migrate-command name="Delete Datical DB Check Sums"/>
+		<migrate-command name="View Datical DB Status"/>
+		<migrate-command name="View Datical DB Status Details"/>
+		<migrate-command name="Check Datical DB Drivers"/>
+		<migrate-command name="Validate Datical DB Rules"/>
+		<migrate-command name="Datical DB Rollback"/>
+		<migrate-command name="Get Database Differences (Change Log)"/>
+		<migrate-command name="Get Database Differences (Report)"/>
+		<migrate-command name="Add Datical DB Project"/>
+		<migrate-command name="Add Datical DB Database Definition"/>
+		<migrate-command name="Datical DB Install License"/>
+	
+	</migrate>
+	
 	<migrate to-version="22">
 	
 		<migrate-command name="Run Groovy Script"/>

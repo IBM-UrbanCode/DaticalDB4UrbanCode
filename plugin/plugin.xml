@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
-    <identifier version="22" id="com.datical.integration.udeploy.DaticalDB4UrbanCode" name="Datical DB" />
+    <identifier version="23" id="com.datical.integration.udeploy.DaticalDB4UrbanCode" name="Datical DB" />
     <description>Datical DB makes it incredibly easy to automate and
 			manage database schema changes for high volume, complex releases,
 			across any environment, for any database. No agents required.
@@ -197,6 +197,9 @@
       </property>
       <property name="daticalDBProjectDir" required="true">
         <property-ui type="textBox" label="Datical DB Project Directory" description="The full path where the Datical DB project is located." default-value="."/>
+      </property>
+	  <property name="daticalDBPipeline" required="true">
+        <property-ui type="textBox" label="Datical DB Pipeline" description="The Datical DB Pipeline in which the target server resides." />
       </property>
       <property name="daticalDBServer" required="true">
         <property-ui type="textBox" label="Datical DB Server" description="The Datical DB Server you wish to manage with Datical DB. You can determine this value by opening Datical DB and choosing a server listed in your Deployment Plan." />

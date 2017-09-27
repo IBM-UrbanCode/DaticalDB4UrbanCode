@@ -17,6 +17,10 @@ This plug-in is protected under the [Apache 2.0 License](https://www.apache.org/
 
 Release Notes:
 
+### Version 23 - September 27, 2017
+
+Added Pipeline parameter to Deploy Command
+
 ### Version 22.223 - October 25, 2016
 
 Community GitHub Release

@@ -28,6 +28,7 @@ def getAbsPath(def file) {
 //path properties
 def daticalDBCmd = getAbsPath(props['daticalDBCmd']);
 def daticalDBDriversDir = getAbsPath(props['daticalDBDriversDir']);
+def daticalDBPipeline = props['daticalDBPipeline'];
 def daticalDBProjectDir = getAbsPath(props['daticalDBProjectDir']);
 def daticalDBAction = "deploy";
 def daticalDBServer = props['daticalDBServer'];
@@ -36,6 +37,7 @@ def daticalDBRollback = props['daticalDBRollback']
 def daticalDBExportSQL = props['daticalDBExportSQL'];
 def daticalDBExportRollbackSQL = props['daticalDBExportRollbackSQL'];
 def daticalDBLabels = props['daticalDBLabels'];
+
 
 if (daticalDBRollback == "false") {
     daticalDBAction = "deploy";
@@ -81,6 +83,11 @@ if (daticalDBDeployThreshold) {
 if (daticalDBLabels) {
 	cmdArgs << "--labels";
 	cmdArgs << daticalDBLabels;
+}
+
+if (daticalDBPipeline) {
+	cmdArgs << "--pipeline";
+	cmdArgs << daticalDBPipeline;
 }
 
 cmdArgs << daticalDBAction;
