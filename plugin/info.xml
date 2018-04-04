@@ -62,6 +62,9 @@
 			Added Pipeline Parameter to Status, Status Details and Forecast Commands
 			Added Support for Datical 5 Server Parameters to Forecast, Deploy, Status, and Status Details Commands
 		</release-note>
+		<release-note plugin-version="26">
+			Refactor Plug-In Steps to Seperate Datical Legacy mode from current Datical implementation.
+		</release-note>
 	</release-notes>
 
 </pluginInfo>

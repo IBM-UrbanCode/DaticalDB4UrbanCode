@@ -50,7 +50,7 @@ if (daticalDBRollback == "false") {
 // START building the CLI args.  Start with the pointer to hammer
 def cmdArgs = [daticalDBCmd]; 
 
-//Check for Datical Service Specific Properties nd BUild the Appropriate Command Line
+//Check for Datical Service Specific Properties and Build the Appropriate Command Line
 if (daticalService && daticalServiceUsername) {
 	cmdArgs << "--daticalServer=" + daticalService;
 	cmdArgs << "--daticalUsername=" + daticalServiceUsername;

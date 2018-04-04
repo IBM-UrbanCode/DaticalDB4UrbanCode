@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" 
+	xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  
   <header>
-    <identifier version="25" id="com.datical.integration.udeploy.DaticalDB4UrbanCode" name="Datical DB" />
+    <identifier version="26" id="com.datical.integration.udeploy.DaticalDB4UrbanCode" name="Datical DB" />
     <description>Datical DB makes it incredibly easy to automate and
 			manage database schema changes for high volume, complex releases,
 			across any environment, for any database. No agents required.
 		</description>
-    <tag>Datical DB</tag>
+    <tag>Datical DRA</tag>
   </header>
 
+  <!-- Common Steps Begin -->
   <step-type name="Run Groovy Script">
     <description>Runs a Groovy Script using Datical DB REPL.</description>
     <properties>
@@ -52,8 +56,7 @@
     </command>
   </step-type>
 
-
-  <step-type name="Register and Baseline Datical DB Project">
+  <step-type name="Register and Baseline Datical Project">
     <description>Baselines a Datical DB Project using project_baseline.groovy.</description>
     <properties>
       <property name="daticalDBCmd" required="true">
@@ -99,7 +102,7 @@
     </command>
   </step-type>
 
-  <step-type name="Create Datical DB Project">
+  <step-type name="Create Datical Project">
     <description>Creates a Datical DB Project using project_creator.groovy.</description>
     <properties>
       <property name="daticalDBCmd" required="true">
@@ -152,7 +155,7 @@
   </step-type>
 
 
-  <step-type name="Get Datical DB Version">
+  <step-type name="Get Datical Version">
     <description>Shows the Datical DB version.</description>
     <properties>
       <property name="daticalDBCmd" required="true">
@@ -186,8 +189,8 @@
     </command>
   </step-type>
 
-  <step-type name="Deploy with Datical DB">
-    <description>Deploys a Datical DB project to a Server.</description>
+  <step-type name="Deploy with Datical">
+    <description>Deploys a Datical Project to a Server.</description>
     <properties>
       <property name="daticalDBCmd" required="true">
         <property-ui type="textBox" label="Datical DB Command" description="The full path to the Datical DB command (e.g., C:\DaticalDB\repl\hammer.bat or /opt/DaticalDB/repl/hammer). Ideally, create a property named daticalDBCmd with the appropriate value." default-value="${p:daticalDBCmd}" />
@@ -311,8 +314,8 @@
     </command>
   </step-type>
 
-  <step-type name="Validate and Forecast with Datical DB">
-    <description>Validates and Forecasts a Datical DB project against a Server.</description>
+  <step-type name="Validate and Forecast with Datical">
+    <description>Validates and Forecasts a Datical Project against a Database.</description>
     <properties>
       <property name="daticalDBCmd" required="true">
         <property-ui type="textBox" label="Datical DB Command" description="The full path to the Datical DB command (e.g., C:\DaticalDB\repl\hammer.bat or /opt/DaticalDB/repl/hammer). Ideally, create a property named daticalDBCmd with the appropriate value." default-value="${p:daticalDBCmd}" />
@@ -320,7 +323,7 @@
 	  <property name="daticalDBDriversDir" required="true">
         <property-ui type="textBox" label="Datical DB Driver Directory" description="The full path where Datical DB drivers are located. Ideally, create a property named daticalDBDriversDir with the appropriate value." default-value="${p:daticalDBDriversDir}" />
       </property>
-	  <property name="daticalProjectName" required="false">
+	  <property name="daticalProjectName" required="true">
         <property-ui type="textBox" label="Datical Project Name" description="The Datical Project Name. Required for using the Datical Service" />
       </property>
       <property name="daticalDBProjectDir" required="true">
@@ -695,8 +698,8 @@
     </command>
   </step-type>
 
-  <step-type name="View Datical DB Status">
-    <description>Reports on the current Status of a Server.</description>
+  <step-type name="View Datical Status">
+    <description>Reports on the current Status of a Database.</description>
     <properties>
       <property name="daticalDBCmd" required="true">
         <property-ui type="textBox" label="Datical DB Command" description="The full path to the Datical DB command (e.g., C:\DaticalDB\repl\hammer.bat or /opt/DaticalDB/repl/hammer). Ideally, create a property named daticalDBCmd with the appropriate value." default-value="${p:daticalDBCmd}" />
@@ -784,8 +787,8 @@
     </command>
   </step-type>
 
-  <step-type name="View Datical DB Status Details">
-    <description>Reports on the detailed current Status of a Server.</description>
+  <step-type name="View Datical Status Details">
+    <description>Reports on the detailed current Status of a Database.</description>
     <properties>
       <property name="daticalDBCmd" required="true">
         <property-ui type="textBox" label="Datical DB Command" description="The full path to the Datical DB command (e.g., C:\DaticalDB\repl\hammer.bat or /opt/DaticalDB/repl/hammer). Ideally, create a property named daticalDBCmd with the appropriate value." default-value="${p:daticalDBCmd}" />
@@ -1473,5 +1476,391 @@
       <arg file="${PLUGIN_OUTPUT_PROPS}" />
     </command>
   </step-type>
-	
+
+<!-- Legacy Versions of Datical Steps for Datical 4 Compatibility Mode-->
+  <step-type name="Deploy with Datical DB">
+	<server:sub-tag>Datical (Legacy)</server:sub-tag>
+    <description>Deploys a Datical DB project to a Server.</description>
+    <properties>
+      <property name="daticalDBCmd" required="true">
+        <property-ui type="textBox" label="Datical DB Command" description="The full path to the Datical DB command (e.g., C:\DaticalDB\repl\hammer.bat or /opt/DaticalDB/repl/hammer). Ideally, create a property named daticalDBCmd with the appropriate value." default-value="${p:daticalDBCmd}" />
+      </property>
+	  <property name="daticalDBDriversDir" required="true">
+        <property-ui type="textBox" label="Datical DB Driver Directory" description="The full path where Datical DB drivers are located. Ideally, create a property named daticalDBDriversDir with the appropriate value." default-value="${p:daticalDBDriversDir}" />
+      </property>
+      <property name="daticalDBProjectDir" required="true">
+        <property-ui type="textBox" label="Datical DB Project Directory" description="The full path where the Datical DB project is located." default-value="."/>
+      </property>
+	  <property name="daticalDBPipeline" required="true">
+        <property-ui type="textBox" label="Datical DB Pipeline" description="The Datical DB Pipeline in which the target server resides." />
+      </property>
+      <property name="daticalDBServer" required="true">
+        <property-ui type="textBox" label="Datical DB Server" description="The Datical DB Server you wish to manage with Datical DB. You can determine this value by opening Datical DB and choosing a server listed in your Deployment Plan." />
+      </property>
+	  <property name="daticalDBUsername" required="true">
+      	<property-ui type="textBox" label="Datical DB Database Username" description = "The username of the Database Server. This is only necessary if username has been removed for the database in Datical project." default-value="${p:daticalDBUsername}"/>
+      </property>
+      <property name="daticalDBPassword" required="true">
+      	<property-ui type="secureBox" label="Datical DB Database Password" description = "The password of the Database Server. This is only necessary if password has been removed for the database in Datical project." default-value="${p:daticalDBPassword}"/>
+      </property>
+	  <property name="daticalDBLabels" required="false">
+        <property-ui type="textBox" label="Datical DB Labels" description="The Datical DB Labels of the Change Sets to deploy." />
+      </property>
+	  <property name="daticalDBContext" required="false">
+        <property-ui type="textBox" label="Datical DB Context" description="The Datical DB Context of your DB Server." />
+      </property>
+      <property name="daticalDBRollback" required="false">
+        <property-ui type="checkBox" label="Automatic Rollback" description="If the Datical DB deploy fails, selecting this box will automatically rollback the server to the initial state using the rollback instructions specified in the Datical DB project and/or the Datical DB defaults." />
+      </property>
+      <property name="daticalDBExportSQL" required="false">
+        <property-ui type="checkBox" label="Export SQL" description="If checked, Datical DB will export SQL to be run against the server." />
+      </property>
+      <property name="daticalDBExportRollbackSQL" required="false">
+        <property-ui type="checkBox" label="Export Rollback SQL" description="If checked, Datical DB will export Rollback SQL to be run against the server." />
+      </property>
+      <property name="daticalDBDeployThreshold" required="false">
+      	<property-ui type="selectBox" label="Deploy Threshold"  description="Sets the deployment threshold for rules." />
+		<value label="Stop on Error">stopOnError</value>
+  		<value label="Stop on Warn">stopOnWarn</value>
+		<value label="Deploy Always">deployAlways</value>
+      </property>
+	  <property name="daticalDBvm" required="false">
+      	<property-ui type="textBox" label="Datical DB JVM" description="The Java Virtual Machine to use with Datical DB. (e.g.,  /usr/lib/jvm/java-7-openjdk-amd64)" />
+      </property>
+      <property name="daticalDBvmargs" required="false">
+      	<property-ui type="textBox" label="Datical DB JVM Arguments" description="The Java Virtual Machine Arguments to use with Datical DB. (e.g., -Xms512M -Xmx1024M)" />
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put("Status", "Failure");
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+        
+        //all
+        scanner.register("(?i)The DaticalDB log file",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+            var log = line.replace("The DaticalDB log file is located at ", "");
+            properties.put("DaticalLog", log);
+        });
+        scanner.register("(?i)cannot be found in the current project",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)Please specify a database as an argument or using the dbdef property",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)No database specified.",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+
+        scanner.register("(?i)Report ready at ",  function(lineNumber, line) {
+              scanner.addLOI(lineNumber);        	
+              var report = line.replace("Report ready at ", "");
+              properties.put("DaticalReport", report);
+              var reportDir = report.replace("deployReport.html", "");
+              properties.put("DaticalReportDir", reportDir);
+        });
+
+        scanner.register("(?i)Generated SQL ready at ",  function(lineNumber, line) {
+			  scanner.addLOI(lineNumber);
+              var genSQL = line.replace("Generated SQL ready at ", "");
+              properties.put("DaticalSQL", genSQL);
+        });
+        scanner.register("(?i)Generated rollback SQL ready at ",  function(lineNumber, line) {
+              scanner.addLOI(lineNumber);
+              var genExportSQL = line.replace("Generated rollback SQL ready at ", "");
+              properties.put("DaticalRollbackSQL", genExportSQL);
+        });
+
+        
+        //deploy
+        scanner.register("(?i)Successfully deployed changes to",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)Update Failed",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        
+        scanner.scan();
+
+     ]]></post-processing>
+    <command program="${agent:GROOVY_HOME}/bin/groovy">
+      <arg value="-cp" />
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar" />
+      <arg file="deploy.groovy" />
+      <arg file="${PLUGIN_INPUT_PROPS}" />
+      <arg file="${PLUGIN_OUTPUT_PROPS}" />
+    </command>
+  </step-type>
+  
+  <step-type name="Validate and Forecast with Datical DB">
+	<server:sub-tag>Datical (Legacy)</server:sub-tag>
+    <description>Validates and Forecasts a Datical DB project against a Server.</description>
+    <properties>
+      <property name="daticalDBCmd" required="true">
+        <property-ui type="textBox" label="Datical DB Command" description="The full path to the Datical DB command (e.g., C:\DaticalDB\repl\hammer.bat or /opt/DaticalDB/repl/hammer). Ideally, create a property named daticalDBCmd with the appropriate value." default-value="${p:daticalDBCmd}" />
+      </property>
+	  <property name="daticalDBDriversDir" required="true">
+        <property-ui type="textBox" label="Datical DB Driver Directory" description="The full path where Datical DB drivers are located. Ideally, create a property named daticalDBDriversDir with the appropriate value." default-value="${p:daticalDBDriversDir}" />
+      </property>
+      <property name="daticalDBProjectDir" required="true">
+        <property-ui type="textBox" label="Datical DB Project Directory" description="The full path where the Datical DB project is located." default-value="."/>
+      </property>
+	  <property name="daticalDBPipeline" required="true">
+        <property-ui type="textBox" label="Datical DB Pipeline" description="The Datical DB Pipeline in which the target server resides." />
+      </property>
+      <property name="daticalDBServer" required="true">
+        <property-ui type="textBox" label="Datical DB Server" description="The Datical DB Server you wish to manage with Datical DB. You can determine this value by opening Datical DB and choosing a server listed in your Deployment Plan." />
+      </property>
+	  <property name="daticalDBUsername" required="false">
+      	<property-ui type="textBox" label="Datical DB Database Username" description = "The username of the Database Server. This is only necessary if username has been removed for the database in Datical project." default-value="${p:daticalDBUsername}"/>
+      </property>
+      <property name="daticalDBPassword" required="false">
+      	<property-ui type="secureBox" label="Datical DB Database Password" description = "The password of the Database Server. This is only necessary if password has been removed for the database in Datical project." default-value="${p:daticalDBPassword}"/>
+      </property>
+	  <property name="daticalDBLabels" required="false">
+        <property-ui type="textBox" label="Datical DB Labels" description="The Datical DB Labels of the Change Sets to deploy." />
+      </property>
+	  <property name="daticalDBContext" required="false">
+        <property-ui type="textBox" label="Datical DB Context" description="The Datical DB Context of your DB Server." />
+      </property>
+      <property name="daticalDBRollback" required="false">
+        <property-ui type="checkBox" label="Automatic Rollback" description="If the Datical DB deploy fails, selecting this box will automatically rollback the server to the initial state using the rollback instructions specified in the Datical DB project and/or the Datical DB defaults." />
+      </property>
+      <property name="daticalDBExportSQL" required="false">
+        <property-ui type="checkBox" label="Export SQL" description="If checked, Datical DB will export SQL to be run against the server." />
+      </property>
+      <property name="daticalDBExportRollbackSQL" required="false">
+        <property-ui type="checkBox" label="Export Rollback SQL" description="If checked, Datical DB will export Rollback SQL to be run against the server." />
+      </property>
+	  <property name="daticalDBvm" required="false">
+      	<property-ui type="textBox" label="Datical DB JVM" description="The Java Virtual Machine to use with Datical DB. (e.g.,  /usr/lib/jvm/java-7-openjdk-amd64)" />
+      </property>
+      <property name="daticalDBvmargs" required="false">
+      	<property-ui type="textBox" label="Datical DB JVM Arguments" description="The Java Virtual Machine Arguments to use with Datical DB. (e.g., -Xms512M -Xmx1024M)" />
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+        
+        //all
+        scanner.register("(?i)The DaticalDB log file",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+            var log = line.replace("The DaticalDB log file is located at ", "");
+            properties.put("DaticalLog", log);
+        });
+        scanner.register("(?i)cannot be found in the current project",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)Please specify a database as an argument or using the dbdef property",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)No database specified.",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)Generated SQL ready at ",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+              var genSQL = line.replace("Generated SQL ready at ", "");
+              properties.put("DaticalSQL", genSQL);
+        });
+        scanner.register("(?i)Generated rollback SQL ready at ",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+              var genExportSQL = line.replace("Generated rollback SQL ready at ", "");
+              properties.put("DaticalRollbackSQL", genExportSQL);
+        });
+        scanner.register("(?i)Report ready at ",  function(lineNumber, line) {
+              var report = line.replace("Report ready at ", "");
+              properties.put("DaticalReport", report);
+              var reportDir = report.replace("forecastReport.html", "");
+              properties.put("DaticalReportDir", reportDir);
+        });
+
+		//forecast
+        scanner.register("(?i)Forecast detected the following problems:",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        
+        scanner.scan();
+        
+        
+
+     ]]></post-processing>
+    <command program="${agent:GROOVY_HOME}/bin/groovy">
+      <arg value="-cp" />
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar" />
+      <arg file="forecast.groovy" />
+      <arg file="${PLUGIN_INPUT_PROPS}" />
+      <arg file="${PLUGIN_OUTPUT_PROPS}" />
+    </command>
+  </step-type>
+  
+  <step-type name="View Datical DB Status">
+	<server:sub-tag>Datical (Legacy)</server:sub-tag>
+    <description>Reports on the current Status of a Server.</description>
+    <properties>
+      <property name="daticalDBCmd" required="true">
+        <property-ui type="textBox" label="Datical DB Command" description="The full path to the Datical DB command (e.g., C:\DaticalDB\repl\hammer.bat or /opt/DaticalDB/repl/hammer). Ideally, create a property named daticalDBCmd with the appropriate value." default-value="${p:daticalDBCmd}" />
+      </property>
+	  <property name="daticalDBDriversDir" required="true">
+        <property-ui type="textBox" label="Datical DB Driver Directory" description="The full path where Datical DB drivers are located. Ideally, create a property named daticalDBDriversDir with the appropriate value." default-value="${p:daticalDBDriversDir}" />
+      </property>
+      <property name="daticalDBProjectDir" required="true">
+        <property-ui type="textBox" label="Datical DB Project Directory" description="The full path where the Datical DB project is located." default-value="."/>
+      </property>
+	  <property name="daticalDBPipeline" required="true">
+        <property-ui type="textBox" label="Datical DB Pipeline" description="The Datical DB Pipeline in which the target server resides." />
+      </property>
+      <property name="daticalDBServer" required="true">
+        <property-ui type="textBox" label="Datical DB Server" description="The Datical DB Server you wish to manage with Datical DB. You can determine this value by opening Datical DB and choosing a server listed in your Deployment Plan." />
+      </property>
+	  <property name="daticalDBUsername" required="false">
+      	<property-ui type="textBox" label="Datical DB Database Username" description = "The username of the Database Server. This is only necessary if username has been removed for the database in Datical project." default-value="${p:daticalDBUsername}"/>
+      </property>
+      <property name="daticalDBPassword" required="false">
+      	<property-ui type="secureBox" label="Datical DB Database Password" description = "The password of the Database Server. This is only necessary if password has been removed for the database in Datical project." default-value="${p:daticalDBPassword}"/>
+      </property>
+      <property name="daticalDBvm" required="false">
+      	<property-ui type="textBox" label="Datical DB JVM" description="The Java Virtual Machine to use with Datical DB. (e.g.,  /usr/lib/jvm/java-7-openjdk-amd64)" />
+      </property>
+      <property name="daticalDBvmargs" required="false">
+      	<property-ui type="textBox" label="Datical DB JVM Arguments" description="The Java Virtual Machine Arguments to use with Datical DB. (e.g., -Xms512M -Xmx1024M)" />
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+        
+        //all
+        scanner.register("(?i)The DaticalDB log file",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+            var log = line.replace("The DaticalDB log file is located at ", "");
+            properties.put("DaticalLog", log);
+        });
+        scanner.register("(?i)cannot be found in the current project",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)Please specify a database as an argument or using the dbdef property",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)No database specified.",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)Report ready at ",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+            var report = line.replace("Report ready at ", "");
+            properties.put("DaticalReport", report);
+        });
+        
+        //status
+        scanner.register("(?i) is up-to-date ",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i) is at ",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        
+        scanner.scan();
+
+     ]]></post-processing>
+    <command program="${agent:GROOVY_HOME}/bin/groovy">
+      <arg value="-cp" />
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar" />
+      <arg file="status.groovy" />
+      <arg file="${PLUGIN_INPUT_PROPS}" />
+      <arg file="${PLUGIN_OUTPUT_PROPS}" />
+    </command>
+  </step-type>
+  
+  <step-type name="View Datical DB Status Details">
+	<server:sub-tag>Datical (Legacy)</server:sub-tag>
+    <description>Reports on the detailed current Status of a Server.</description>
+    <properties>
+      <property name="daticalDBCmd" required="true">
+        <property-ui type="textBox" label="Datical DB Command" description="The full path to the Datical DB command (e.g., C:\DaticalDB\repl\hammer.bat or /opt/DaticalDB/repl/hammer). Ideally, create a property named daticalDBCmd with the appropriate value." default-value="${p:daticalDBCmd}" />
+      </property>
+	  <property name="daticalDBDriversDir" required="true">
+        <property-ui type="textBox" label="Datical DB Driver Directory" description="The full path where Datical DB drivers are located. Ideally, create a property named daticalDBDriversDir with the appropriate value." default-value="${p:daticalDBDriversDir}" />
+      </property>
+      <property name="daticalDBProjectDir" required="true">
+        <property-ui type="textBox" label="Datical DB Project Directory" description="The full path where the Datical DB project is located." default-value="."/>
+      </property>
+	  <property name="daticalDBPipeline" required="true">
+        <property-ui type="textBox" label="Datical DB Pipeline" description="The Datical DB Pipeline in which the target server resides." />
+      </property>
+      <property name="daticalDBServer" required="false">
+        <property-ui type="textBox" label="Datical DB Server" description="The Datical DB Server you wish to manage with Datical DB. You can determine this value by opening Datical DB and choosing a server listed in your Deployment Plan." />
+      </property>
+	  <property name="daticalDBUsername" required="false">
+      	<property-ui type="textBox" label="Datical DB Database Username" description = "The username of the Database Server. This is only necessary if username has been removed for the database in Datical project." default-value="${p:daticalDBUsername}"/>
+      </property>
+      <property name="daticalDBPassword" required="false">
+      	<property-ui type="secureBox" label="Datical DB Database Password" description = "The password of the Database Server. This is only necessary if password has been removed for the database in Datical project." default-value="${p:daticalDBPassword}"/>
+      </property>
+      <property name="daticalDBvm" required="false">
+      	<property-ui type="textBox" label="Datical DB JVM" description="The Java Virtual Machine to use with Datical DB. (e.g.,  /usr/lib/jvm/java-7-openjdk-amd64)" />
+      </property>
+      <property name="daticalDBvmargs" required="false">
+      	<property-ui type="textBox" label="Datical DB JVM Arguments" description="The Java Virtual Machine Arguments to use with Datical DB. (e.g., -Xms512M -Xmx1024M)" />
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+        
+        //all
+        scanner.register("(?i)The DaticalDB log file",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+            var log = line.replace("The DaticalDB log file is located at ", "");
+            properties.put("DaticalLog", log);
+        });
+        scanner.register("(?i)cannot be found in the current project",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)Please specify a database as an argument or using the dbdef property",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)No database specified.",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i)Report ready at ",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+            var report = line.replace("Report ready at ", "");
+            properties.put("DaticalReport", report);
+        });
+        
+        //status
+        scanner.register("(?i) is up-to-date ",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        scanner.register("(?i) is at ",  function(lineNumber, line) {
+        	scanner.addLOI(lineNumber);
+        });
+        
+        scanner.scan();
+
+     ]]></post-processing>
+    <command program="${agent:GROOVY_HOME}/bin/groovy">
+      <arg value="-cp" />
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar" />
+      <arg file="statusdetails.groovy" />
+      <arg file="${PLUGIN_INPUT_PROPS}" />
+      <arg file="${PLUGIN_OUTPUT_PROPS}" />
+    </command>
+  </step-type>
+  
 </plugin>
